@@ -15,7 +15,6 @@ before_install:
   - gcloud config set compute/zone us-east1-b
   - gcloud container clusters get-credentials multi-cluster
   - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_USERNAME" --password
-before_install:
   - docker build -t yacaschdkr20/react-test -f ./client/Dockerfile.dev ./client
 
 script:
@@ -23,7 +22,7 @@ script:
 
 deploy:
   provider: script
-  script: bash ./deploy.sh
+  script: bash deploy.sh
   on:
     branch: master
 
