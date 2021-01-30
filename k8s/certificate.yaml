@@ -1,0 +1,22 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: k8s-multi-com-tls
+spec:
+  secretName: k8s-multi-com-sec
+  issuerRef:
+    name: letsencrypt-prod
+    # We can reference ClusterIssuers by changing the kind here.
+    # The default value is Issuer (i.e. a locally namespaced Issuer)
+    kind: ClusterIssuer
+  commonName: nyalaweb.com
+  dnsNames:
+    - nyalaweb.com
+    - www.nyalaweb.com
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - nyalaweb.com
+          - www.nyalaweb.com
